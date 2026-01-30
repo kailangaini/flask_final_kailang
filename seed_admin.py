@@ -6,7 +6,6 @@ with app.app_context():
     admin = User(
         username="admin",
         password=generate_password_hash("123123"),
-        is_admin=True
     )
 
     db.session.add(admin)
