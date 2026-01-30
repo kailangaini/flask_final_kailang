@@ -1,0 +1,47 @@
+{% extends 'pageFront/master.html' %}
+{% block content %}
+<main>
+    <h2>Our Latest Collection</h2>
+    <p>Browse our exclusive shirts designed for comfort and style. Order yours today!</p>
+
+    <div class="category-filter-box">
+        <div class="category-filter">
+            <a href="{{ url_for('products_filter') }}"
+               class="cat-btn {% if not selected_category %}active{% endif %}">
+                All
+            </a>
+
+            {% for cat in categories %}
+                <a href="{{ url_for('products_filter', category=cat['name']) }}"
+                   class="cat-btn {% if selected_category == cat['name'] %}active{% endif %}">
+                    {{ cat['name'] }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="product-grid">
+        {% if products %}
+            {% for product in products %}
+                <div class="product-card">
+                    <a href="{{ url_for('product_details', product_id=product['id']) }}">
+                        <img src="{{ product['image'] }}" alt="{{ product['title'] }}">
+                    </a>
+
+                    {% if product['price'] > 10 %}
+                        <h3>{{ product['name'] }}</h3>
+                    {% else %}
+                        <h3 style="color:red">{{ product['title'] }}</h3>
+                    {% endif %}
+
+                    <p>{{ product['description'] | truncate(50) }}</p>
+                    <p class="price">${{ product['price'] }}</p>
+                    <button class="btn">Add to Cart</button>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No products available right now. Please check back later.</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

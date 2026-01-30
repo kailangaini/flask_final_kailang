@@ -1,0 +1,65 @@
+{% extends 'pageFront/master.html' %}
+
+{% block content %}
+<main class="product-detail-page py-5">
+  <div class="container" style="max-width: 1000px;">
+
+    <nav class="mb-4">
+      <a href="{{ url_for('home') }}" class="text-muted text-decoration-none d-inline-flex align-items-center gap-2" style="font-weight: 500; transition: 0.3s;">
+        <i class="fas fa-arrow-left small"></i>
+        <span>Back to Collection</span>
+      </a>
+    </nav>
+
+    <div class="product-container shadow-lg rounded-4 overflow-hidden bg-white d-flex flex-column flex-md-row">
+
+      <div class="product-image-wrapper p-4 p-lg-5 d-flex align-items-center justify-content-center bg-light" style="flex: 1;">
+        <div class="img-zoom-container">
+            <img src="{{ product.image }}"
+                 alt="{{ product.name }}"
+                 class="img-fluid main-product-img"
+                 style="max-height: 450px; object-fit: contain;">
+        </div>
+      </div>
+
+      <div class="product-info-wrapper p-4 p-lg-5 d-flex flex-column" style="flex: 1.2;">
+
+        <div class="mb-auto">
+            <span class="badge mb-3 text-uppercase" style="background: rgba(255, 102, 0, 0.1); color: #ff6600; letter-spacing: 1px; padding: 8px 12px; border-radius: 6px;">
+              {{ product.category or 'Premium Selection' }}
+            </span>
+
+            <h1 class="fw-bold mb-3" style="color: #222; font-size: 2.2rem; line-height: 1.2;">
+              {{ product.name }}
+            </h1>
+
+            <p class="price mb-4" style="font-size: 2.5rem; color: #e63946; font-weight: 800;">
+              ${{ "%.2f"|format(product.price) }}
+            </p>
+
+            <div class="description-box mb-5">
+                <h6 class="text-uppercase fw-bold text-dark mb-2" style="font-size: 0.85rem; opacity: 0.6;">Description</h6>
+                <p class="text-muted lh-base" style="font-size: 1.05rem;">
+                  {{ product.description }}
+                </p>
+            </div>
+        </div>
+
+        <div class="action-zone d-flex gap-3 mt-4">
+          <button class="btn btn-lg flex-grow-1 shadow-sm d-flex align-items-center justify-content-center gap-2"
+                  style="border-radius: 30px; height: 60px; font-weight: 600; background: #ff6600; color: #fff; border: none;">
+            <i class="fas fa-shopping-cart"></i>
+            Add to Cart
+          </button>
+
+          <button class="btn btn-outline-light border btn-lg px-4"
+                  style="border-radius: 30px; color: #333; width: 60px; display: flex; align-items: center; justify-content: center; border: 1px solid #eee !important;">
+            <i class="far fa-heart"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
