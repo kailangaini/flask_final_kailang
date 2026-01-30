@@ -31,4 +31,5 @@ def do_login():
 
 @app.get('/logout')
 def logout():
-    return render_template('admin/Auth/login.html')
+    session.clear()
+    return redirect(url_for('login'))
